@@ -1,7 +1,10 @@
+using System.Security.Authentication.ExtendedProtection;
+
 public static class Divisors {
     /// <summary>
     /// Entry point for the Divisors class
     /// </summary>
+
     public static void Run() {
         List<int> list = FindDivisors(80);
         Console.WriteLine("<List>{" + string.Join(", ", list) + "}"); // <List>{1, 2, 4, 5, 8, 10, 16, 20, 40}
@@ -19,6 +22,13 @@ public static class Divisors {
     private static List<int> FindDivisors(int number) {
         List<int> results = new();
         // TODO problem 1
+        for (int i=1; i<(number/2); i++)
+        {
+            if (number % i == 0)
+            {
+                results.Add(i);    
+            }
+        }
         return results;
     }
 }

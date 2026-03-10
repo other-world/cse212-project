@@ -11,6 +11,26 @@ public static class ArraySelector
 
     private static int[] ListSelector(int[] list1, int[] list2, int[] select)
     {
-        return [];
+        // My for loop is based on the lenth of the select array. We will itterate through it, and use the value, to learn which array we're grabbing from. I'll need two variables that keep track of where we're at in each array. 
+
+        int l1Pos = 0;
+        int l2Pos = 0;
+        var combinedArray = new int[select.Length];
+
+
+        for (int i=0; i<select.Length; i++)
+        {
+            if (select[i] == 1)
+            {
+                combinedArray[i] = list1[l1Pos];
+                l1Pos++;
+            }
+            else
+            {
+                combinedArray[i] = list2[l2Pos];
+                l2Pos++;
+            }
+        }
+        return combinedArray;
     }
 }
