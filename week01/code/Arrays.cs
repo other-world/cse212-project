@@ -15,9 +15,9 @@ public static class Arrays
         // be implemented by another person.
 
         // SOLUTION
-        // set up the new array
-        // create a for loop and run it "length" times
-        // During each loop, set up the new multiple an add it to the new array
+        // Set up the new array
+        // Create a for loop and run it "length" times
+        // During each loop, set up the new multiple and add it to the new array
 
         var multiples = new double[length];
 
@@ -44,9 +44,9 @@ public static class Arrays
         // be implemented by another person.
 
         // SOLUTION
-        // Run a for loop to run the number of times for the rotation
-        // Because lists are dynamic, starting with the last number, insert it at the beginning of the list, and then delete the current list item we're working with.
-        // *Important, when you insert a few item in the array, for a moment it will one item larger before you try to do the removeal. So pay attention to what you remove from the array.
+        // Create a for loop and run it "rotation" times
+        // Because lists are dynamic, take the last item in the list, insert it at the beginning of the list, and then delete the last item.
+        // *Important, when you insert a new item in the array, for a moment it will one item larger before you try to do the removeal. So pay attention to what you remove from the array.
 
         //Debug.WriteLine("List Before: " + string.Join(", ", data));
         int last=data.Count-1;
