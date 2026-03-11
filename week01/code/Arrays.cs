@@ -1,3 +1,4 @@
+using System.Diagnostics;
 public static class Arrays
 {
     /// <summary>
@@ -13,7 +14,19 @@ public static class Arrays
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
-        return []; // replace this return statement with your own
+        // SOLUTION
+        // set up the new array
+        // create a for loop and run it "length" times
+        // During each loop, set up the new multiple an add it to the new array
+
+        var multiples = new double[length];
+
+        for (int i=1; i<=length; i++)
+        {
+            multiples[i-1] = number * i;
+        }
+
+        return multiples; // replace this return statement with your own
     }
 
     /// <summary>
@@ -29,5 +42,27 @@ public static class Arrays
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
+
+        // SOLUTION
+        // Run a for loop to run the number of times for the rotation
+        // Because lists are dynamic, starting with the last number, insert it at the beginning of the list, and then delete the current list item we're working with.
+        // *Important, when you insert a few item in the array, for a moment it will one item larger before you try to do the removeal. So pay attention to what you remove from the array.
+
+        //Debug.WriteLine("List Before: " + string.Join(", ", data));
+        int last=data.Count-1;
+        for (int i=0; i<amount; i++)
+        {
+            //Debug.WriteLine("Last index value: " + last);
+            //Debug.WriteLine("Current data value:" + data[last]);
+            int dataValue = data[last];
+            data.Insert(0, dataValue);
+
+            //Both these remove statements work. I was stuck here a while and I can't decide which version is more elegant.
+            //data.RemoveAt(data.Count-1);
+            data.RemoveAt(last+1);
+
+            //Debug.WriteLine("List After: " + string.Join(", ", data));
+        }
+        
     }
 }
