@@ -11,18 +11,29 @@ public class CustomerService {
         // Test Cases
 
         // Test 1
-        // Scenario: 
-        // Expected Result: 
+        // Scenario: Test queue creation with value less or equal to 0, and one with size 4
+        // Expected Result: queue size of 10, and queue size of 4
         Console.WriteLine("Test 1");
+
+        var cszero = new CustomerService(0);
+        Console.WriteLine(cszero);
+        var csfour = new CustomerService(4);
+                Console.WriteLine(csfour);
+
 
         // Defect(s) Found: 
 
         Console.WriteLine("=================");
 
         // Test 2
-        // Scenario: 
-        // Expected Result: 
+        // Scenario: The AddNewCustomer method shall enqueue a new customer into the queue.
+        // Expected Result: Print out queue with Customers
         Console.WriteLine("Test 2");
+
+        csfour.AddNewCustomer();
+        csfour.AddNewCustomer();
+        Console.WriteLine(csfour);
+
 
         // Defect(s) Found: 
 
