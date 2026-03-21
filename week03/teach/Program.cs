@@ -15,4 +15,4 @@ Basketball.Run();
 // DisplaySumsSolution.Run();
 
 // Console.WriteLine("\n======================\nBasketball\n======================");
-// BasketballSolution.Run();
+BasketballSolution.Run();
