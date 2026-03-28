@@ -1,3 +1,5 @@
+using System;
+using System.ComponentModel;
 using System.Text.Json;
 
 public static class SetsAndMaps
@@ -22,7 +24,42 @@ public static class SetsAndMaps
     public static string[] FindPairs(string[] words)
     {
         // TODO Problem 1 - ADD YOUR CODE HERE
-        return [];
+        HashSet<String> pairs = new HashSet<String>();
+        // Annoying that you sent us an Array instead of a HashSet to beging with.
+        foreach (string pair in words)
+        {
+            pairs.Add(pair);
+        }
+
+        var pairSet = new List<String>();
+       
+        foreach (string pair in pairs)
+        {
+            // Reverse the pair
+            // Adding a simple method to reverse the string that I can call each time. I'm a bit worried. I just looked up how to do this and copied the code. So the ReverseString method isn't my own work.
+            String pair_r = ReverseString(pair);
+            pairs.Remove(pair);
+
+            if (pairs.Contains(pair_r))
+            {
+                String completePair = pair + " & " + pair_r;
+                pairSet.Add(completePair);
+
+                pairs.Remove(pair_r);
+            }
+    
+        }
+
+        return pairSet.ToArray();
+    }
+
+    static string ReverseString(string s)
+    {
+        // Convert to char array, then call Array.Reverse.
+        // ... Finally use string constructor on array.
+        char[] array = s.ToCharArray();
+        Array.Reverse(array);
+        return new string(array);
     }
 
     /// <summary>
@@ -43,6 +80,16 @@ public static class SetsAndMaps
         {
             var fields = line.Split(",");
             // TODO Problem 2 - ADD YOUR CODE HERE
+            // Check dictionary to see if key already exists. If yes, then increment the value. If no, add degree.
+
+            if (degrees.ContainsKey(fields[3]))
+            {
+                degrees[fields[3]] += 1;
+            }
+            else
+            {
+                degrees.Add(fields[3], 1);
+            }
         }
 
         return degrees;
@@ -67,7 +114,59 @@ public static class SetsAndMaps
     public static bool IsAnagram(string word1, string word2)
     {
         // TODO Problem 3 - ADD YOUR CODE HERE
-        return false;
+        var anagramCheck = new Dictionary<char, int>();
+        var anagramCheck2 = new Dictionary<char, int>();
+
+        // Remove spaces
+        word1 = word1.Replace(" ", "");
+        word2 = word2.Replace(" ", "");
+
+        // Set strings to lowercase
+        word1 = word1.ToLower();
+        word2 = word2.ToLower();
+
+        // Put each word into a dictionary and track the numver of times each letter appears
+        foreach (char c in word1)
+        {
+            if (anagramCheck.ContainsKey(c))
+            {
+                anagramCheck[c] += 1;
+            }
+            else
+            {
+                anagramCheck.Add(c, 1);
+            }
+        }
+        foreach (char c in word2)
+        {
+            if (anagramCheck2.ContainsKey(c))
+            {
+                anagramCheck2[c] += 1;
+            }
+            else
+            {
+                anagramCheck2.Add(c, 1);
+            }
+        }
+
+        /* foreach (var entry in anagramCheck)
+        {
+            Console.WriteLine(entry);
+        }
+        foreach(var entry in anagramCheck2)
+        {
+            Console.WriteLine(entry);
+        } */
+
+        // Compare the two dictionaries
+        if (anagramCheck.OrderBy(keyValuePair => keyValuePair.Key).SequenceEqual(anagramCheck2.OrderBy(keyValuePair => keyValuePair.Key)))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     /// <summary>
