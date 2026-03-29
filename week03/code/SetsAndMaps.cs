@@ -204,7 +204,7 @@ public static class SetsAndMaps
         foreach (Feature earthquake in featureCollection.features)
         {
             earthquakes.Add(earthquake.properties.getEarthquake());
-            Console.WriteLine(earthquake.properties.getEarthquake());
+            // Console.WriteLine(earthquake.properties.getEarthquake());
         }
         return earthquakes.ToArray();
     }
