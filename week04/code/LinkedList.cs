@@ -44,9 +44,9 @@ public class LinkedList : IEnumerable<int>
         // If the list is not empty, then only head will be affected.
         else
         {
-            newNode.Next = _head; // Connect new node to the previous head
-            _tail.Next = newNode; // Connect the previous head to the new node
-            _head = newNode; // Update the head to point to the new node
+            newNode.Prev = _tail; // Set the "prev" of the new node to the current tail
+            _tail.Next = newNode; // Set the "next" of the current tail to the new node
+            _tail = newNode; // Update the tail to point to the new node
         }
     
     }
@@ -81,6 +81,19 @@ public class LinkedList : IEnumerable<int>
     public void RemoveTail()
     {
         // TODO Problem 2
+        if (_head == _tail)
+        {
+            _head = null;
+            _tail = null;
+        }
+        else if (_head is not null)
+        {
+            // Set the "next" of the second to last node (tail.Prev) to nothing (tail.Prev.Next = null)
+            _tail.Prev!.Next = null;
+            // Set the tail to be the second to last node (tail = tail.Prev)
+            _tail = _tail.Prev;
+        }
+
     }
 
     /// <summary>
@@ -125,13 +138,50 @@ public class LinkedList : IEnumerable<int>
     public void Remove(int value)
     {
         // TODO Problem 3
+        // Deal with an empty list
         Node? curr = _head;
-        while (curr.Data != value)
+        if (_head == null)
         {
-            curr = curr.Next;
+            //throw new InvalidOperationException("The list is empty, nothing can be removed.");
+            return;
         }
-
-
+        else if (_head == _tail && _head.Data == value)
+        {
+            _head = null;
+            _tail = null;  
+            return;
+        }
+        // If removing the first item in the list...
+        else if (_head.Data == value)
+        {
+            _head.Next!.Prev = null;
+            _head = _head.Next!;
+            return;
+        }
+        else
+        {
+            while (curr is not null)
+            {
+                if (curr.Data == value)
+                {
+                    // Set the prev of the node after current to the node before current (current.Next.Prev = current.Prev)
+                    if (curr.Next is not null)
+                    {
+                        curr.Next!.Prev = curr.Prev;
+                        curr.Prev!.Next = curr.Next;
+                    }
+                    else
+                    {
+                        _tail = curr.Prev;
+                        curr.Prev.Next = null;
+                        //_tail = curr;
+                    }
+                    // Set the next of the node before current to the node after current (current.Prev.Next = current.Next)
+                    return;
+                }
+                curr=curr.Next;
+            }
+        }
     }
 
     /// <summary>
@@ -141,13 +191,16 @@ public class LinkedList : IEnumerable<int>
     {
         // TODO Problem 4
         Node? curr = _head;
+
         while (curr is not null)
         {
             if (curr.Data == oldValue)
             {
                 curr.Data = newValue;
             }
+            curr=curr.Next;
         }
+
     }
 
     /// <summary>
@@ -184,6 +237,11 @@ public class LinkedList : IEnumerable<int>
             yield return curr.Data;
             curr = curr.Prev;
         }
+        //List<int> result = new List<int>();
+
+        // fill it in reverse order
+
+        //return result;
     }
 
     public override string ToString()
