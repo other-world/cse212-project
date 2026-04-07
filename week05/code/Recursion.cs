@@ -1,4 +1,5 @@
 using System.Collections;
+using Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Payloads;
 
 public static class Recursion
 {
@@ -127,10 +128,16 @@ public static class Recursion
         if (s == 3)
             return 4;
 
+        if (remember == null)
+            remember = new Dictionary<int, decimal>();
+
         // TODO Start Problem 3
+        if (remember.ContainsKey(s))
+            return remember[s];
 
         // Solve using recursion
-        decimal ways = CountWaysToClimb(s - 1) + CountWaysToClimb(s - 2) + CountWaysToClimb(s - 3);
+        decimal ways = CountWaysToClimb(s - 1, remember) + CountWaysToClimb(s - 2, remember) + CountWaysToClimb(s - 3, remember);
+        remember[s] = ways;
         return ways;
     }
 
@@ -150,6 +157,30 @@ public static class Recursion
     public static void WildcardBinary(string pattern, List<string> results)
     {
         // TODO Start Problem 4
+        if (string.IsNullOrEmpty(pattern))
+        {
+            results.Add("");
+            return;
+        }
+        // Look for *s
+        int _stars = pattern.IndexOf('*');
+        if (_stars == -1)
+        {
+            results.Add(pattern);
+            return;
+        }
+        else
+        {
+            string beginning = pattern[.._stars];
+            string ending = pattern[_stars..];
+            string newEnding = ending.Remove(0, 1);
+
+            WildcardBinary(beginning + "0" + newEnding, results);
+            WildcardBinary(beginning + "1" + newEnding, results);
+
+        }
+
+    
     }
 
     /// <summary>
