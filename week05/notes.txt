@@ -1,0 +1,25 @@
+A B C D
+A   B C D
+    B   C D
+        C   D
+            D
+
+B A C D
+B   A C D
+    A   C D
+        C   D
+            D
+
+C A B D
+C   A B D
+    A   B D
+        B   D
+            D
+
+D A B C
+D   A B C
+    A   B C
+        B   C
+            C
+
+
