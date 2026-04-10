@@ -13,7 +13,11 @@ public class Node
     {
         // TODO Start Problem 1
 
-        if (value < Data)
+        if (value == Data)
+        {
+            return;
+        }
+        else if (value < Data)
         {
             // Insert to the left
             if (Left is null)
@@ -34,12 +38,52 @@ public class Node
     public bool Contains(int value)
     {
         // TODO Start Problem 2
+        if (value == Data)
+        {
+            return true;
+        }
+        else if (value < Data)
+        {
+            // Traverse to the left
+            if (Left is null)
+                return false;
+            else if (Left.Contains(value))
+                    return true;
+        }
+        else
+        {
+            // Traverse to the right
+            if (Right is null)
+                return false;
+            else if (Right.Contains(value))
+                    return true;
+        }
         return false;
     }
 
     public int GetHeight()
     {
         // TODO Start Problem 4
-        return 0; // Replace this line with the correct return statement(s)
+        // This turned out ugly. I talked to ChatGPT about improving it, and ChatGPT gave me a really clean version, but this is my own work, so it's what I'm turning in.
+        if (Left is null && Right is null)
+            return 1;
+        else if (Left is null && Right is not null)
+        {
+            return Right.GetHeight() + 1;
+        }
+        else if (Right is null && Left is not null)
+        {
+            return Left.GetHeight() + 1;
+        }
+        else if (Left.GetHeight() > Right.GetHeight())
+        {
+            return Left.GetHeight() + 1;
+        }
+        else
+        {
+            return Right.GetHeight() + 1;
+        }
+
+        //return 0; // Replace this line with the correct return statement(s)
     }
 }
